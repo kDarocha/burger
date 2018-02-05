@@ -1,19 +1,20 @@
-import _ from 'lodash';
 import React from 'react';
 
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = (props) => {
-  const ingredientRender = _.keys(props.ingredients).map((ingredient) => {
-    let currentIngredient = [];
+  let ingredientRender = Object.keys(props.ingredients).map((ingredient) => {
+    return [...Array(props.ingredients[ingredient])].map((_, i) => {
+      return <BurgerIngredient key={ingredient + i} type={ingredient} />;
+    });
+  }).reduce((arr, el) => {
+    return arr.concat(el);
+  }, []);
 
-    for (let i = 0, length = props.ingredients[ingredient]; i < length; i++) {
-      currentIngredient.push(<BurgerIngredient key={ingredient + i} type={ingredient} />);
-    }
-
-    return currentIngredient;
-  });
+  if (ingredientRender.length === 0) {
+    ingredientRender = <p>Please start adding ingredients!</p>;
+  }
 
   return (
     <div className={classes.Burger}>
