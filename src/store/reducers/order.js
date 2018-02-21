@@ -42,13 +42,13 @@ const fetchOrdersFailed = (state) => {
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case actionTypes.PURCHASE_INIT: return purchaseInit();
-    case actionTypes.PURCHASE_BURGER_START: return purchaseBurgerStart();
-    case actionTypes.PURCHASE_BURGER_SUCCESS: return purchaseBurgerSuccess();
-    case actionTypes.FETCH_INGREDIENTS_FAILED: return fetchIngredientsFailed();
-    case actionTypes.FETCH_ORDERS_START: return fetchOrdersStart();
-    case actionTypes.FETCH_ORDERS_SUCCESS: return fetchOrdersSuccess();
-    case actionTypes.FETCH_ORDERS_FAIL: return fetchOrdersFailed();
+    case actionTypes.PURCHASE_INIT: return purchaseInit(state);
+    case actionTypes.PURCHASE_BURGER_START: return purchaseBurgerStart(state);
+    case actionTypes.PURCHASE_BURGER_SUCCESS: return purchaseBurgerSuccess(state, action);
+    case actionTypes.FETCH_INGREDIENTS_FAILED: return fetchIngredientsFailed(state);
+    case actionTypes.FETCH_ORDERS_START: return fetchOrdersStart(state);
+    case actionTypes.FETCH_ORDERS_SUCCESS: return fetchOrdersSuccess(state, action);
+    case actionTypes.FETCH_ORDERS_FAIL: return fetchOrdersFailed(state);
     default: return state;
   }
 };
